@@ -28,10 +28,11 @@ Rules -> alerts -> analyst investigation -> incident report
 | Windows endpoint (optional) | TBD | TBD | TBD | Not deployed |
 
 ## Planning checks
-- Host CPU / core count: TBD
-- Host RAM: TBD
-- Available disk: TBD
-- Hypervisor / container support: TBD
+- Host OS: Windows 11 Pro 64-bit, build 10.0.26200 (observed 2026-09-22)
+- Host CPU / core count: Intel Core i7-8850H, 6 cores / 12 threads (observed)
+- Host RAM: 31.66 GiB total, 22.81 GiB free at diagnostic (observed)
+- Available disk: C: 237.52 GiB total, **18.4 GiB free**; additional usable volumes not yet verified. **Storage is a blocker to deployment.**
+- Hypervisor / container support: Windows reports HypervisorPresent=True; Docker CLI 29.7.2, Engine availability not confirmed (blank version); WSL 2 with default docker-desktop. Firmware virtualization field not visible in shared output.
 - Isolated network type and inbound access policy: TBD
 - Wazuh deployment method and actual versions: TBD
 
