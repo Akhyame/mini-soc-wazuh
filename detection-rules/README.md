@@ -5,9 +5,9 @@ Rules below are **implementation- and evidence-tracked**. A successful `wazuh-lo
 | Scenario | Rule file / ID | Status | Actual test evidence |
 | --- | --- | --- | --- |
 | Repeated SSH failures from one source IP | [`ssh-repeated-failures.xml`](ssh-repeated-failures.xml), **custom 100100**, level 10 | Installed on lab manager; synthetic test **PASS**; bounded live loopback SSH test **PASS**; threshold tuning pending | Five local SSH failures in 35 seconds matched one alert **100100**, level 10. [Private Notion screenshots P04-01/02/04](https://app.notion.com/p/3e37554fee9d81a6a57feee525dc272c). |
-| Failures followed by login success | TBD | Planned; automatic correlation feasibility not verified | Pending |
-| Login outside lab-defined working hours | TBD | Planned | Pending |
-| Privileged action | TBD | Planned | Pending |
+| Failures followed by login success | Built-in **5760** (failure), **5715** (success) | Controlled failure → success sequence **observed**; automatic correlation **not implemented** | Ubuntu journal: 17:14:57 UTC failed SSH, 17:15:02 UTC accepted SSH, same source; both appeared as separate indexed Wazuh alerts. Private Notion evidence P04-05. |
+| Login outside lab-defined working hours | [`ssh-off-hours.xml`](ssh-off-hours.xml), **custom 100101**, level 10 | Installed; synthetic and bounded live local SSH tests **PASS** | Lab policy 09:00–18:00 **UTC**; test `wazuh-logtest` before 18:00 matched built-in 5715 and after 18:00 matched 100101. At 18:05:13 UTC an authorized SSH success generated one matching live Wazuh rule 100101, level 10 alert (source port 58948). Private Notion P04-06/07. |
+| Privileged action | [`sudo-root-use.xml`](sudo-root-use.xml), **custom 100102**, level 5 | Installed; bounded live sudo test **PASS** | Lab user invoked `sudo /usr/bin/true` at 18:14:37 UTC; Ubuntu journal recorded `USER=root` and the command, and Wazuh produced rule 100102, level 5 with matching `data.command`. This is authorized privilege use, **not** evidence of privilege escalation. Private Notion P04-08. |
 
 ## Repeated SSH failures — precise scope
 
@@ -18,3 +18,15 @@ In a single interactive `sudo /var/ossec/bin/wazuh-logtest` session, one simulat
 Potential false positives include a legitimate user entering an incorrect password repeatedly, or multiple users behind the same source IP. Match-only evidence is not evidence of intrusion.
 
 For each future rule, document the source log, grouping keys, frequency/timeframe, implemented rule ID, test input, observed output, and limitations. Do not present a manual analyst query as automated detection.
+
+## Off-hours SSH login — custom rule 100101
+
+The rule extends Wazuh built-in SSH success rule **5715** with `<time>6 pm - 9 am</time>`. The lab-defined normal hours are **09:00–18:00 UTC** and are illustrative, not a real organization's policy. The manager's clock is UTC; both VM clocks were compared, but `timedatectl` reported `System clock synchronized: no`, so unattended time synchronization is not claimed. Rule XML syntax validation returned zero and manager was active after restart. An interactive logtest run before 18:00 UTC reported rule 5715 and a later run after 18:00 UTC reported rule 100101, level 10. On 2026-09-22 18:05:13 UTC, one actual authorized local SSH login produced a matching rule 100101, level 10 Wazuh alert (endpoint journal `Accepted password`, source loopback port 58948). The syslog timestamp typed into `wazuh-logtest` is not itself evidence of the time-condition evaluation; the manager's clock during each test mattered. Legitimate maintenance outside lab hours is a possible false positive. [Private evidence: P04-06/07](https://app.notion.com/p/3e37554fee9d81a6a57feee525dc272c).
+
+## Sudo executed as root — custom rule 100102
+
+Rule 100102 extends built-in rule **5402** and labels any successful `sudo` execution as `root` for analyst review. A no-op `sudo /usr/bin/true` command by the authorized lab user at 2026-09-22 18:14:37 UTC yielded a source journal entry with `USER=root ; COMMAND=/usr/bin/true` and a matching Wazuh rule 100102, level 5 alert; the expanded document also showed `data.command=/usr/bin/true` and `data.dstuser=root`. Normal administrative commands (including inspecting logs) also trigger this rule, so the alert is **not** proof of malicious escalation and its operational noise needs evaluation. [Private evidence: P04-08](https://app.notion.com/p/3e37554fee9d81a6a57feee525dc272c).
+
+## Failure followed by success — manual correlation only
+
+A controlled single SSH failure at 17:14:57 UTC followed by authorized SSH success at 17:15:02 UTC (same endpoint/source) was observed as two **separate** built-in Wazuh alerts, rules 5760 and 5715. No custom automated failed→success correlation or alert has been implemented or verified. This is a manual investigation example, not evidence of account compromise. [Private evidence: P04-05](https://app.notion.com/p/3e37554fee9d81a6a57feee525dc272c).
