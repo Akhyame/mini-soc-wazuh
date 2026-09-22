@@ -4,7 +4,7 @@
 
 | Phase | Scope | Status | Evidence |
 | --- | --- | --- | --- |
-| 01 | Host resources, isolated architecture and network plan | Not started | Pending |
+| 01 | Host resources, isolated architecture and network plan | In progress — resource survey recorded; storage blocker | [Phase 01](https://app.notion.com/p/3e37554fee9d81c5b977cffab8cf66af) |
 | 02 | Wazuh manager, indexer and dashboard deployment | Not started | Pending |
 | 03 | Ubuntu agent connection and SSH log collection | Not started | Pending |
 | 04 | Baseline and custom detection rules | Not started | Pending |
