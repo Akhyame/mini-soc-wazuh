@@ -1,0 +1,13 @@
+<!--
+  Mini SOC custom rule 100100
+  Extracted from the tested local_rules.xml addition (22 September 2026).
+  Add this rule INSIDE the existing <group name="local,syslog,sshd,">
+  in /var/ossec/etc/rules/local_rules.xml on the Wazuh manager.
+  Do not overwrite the surrounding Wazuh-managed/default content.
+-->
+<rule id="100100" level="10" frequency="5" timeframe="120">
+  <if_matched_sid>5760</if_matched_sid>
+  <same_srcip />
+  <description>Mini SOC: repeated failed SSH logins from the same source IP.</description>
+  <group>authentication_failed,mini_soc,</group>
+</rule>
