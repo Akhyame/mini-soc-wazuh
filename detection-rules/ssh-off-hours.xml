@@ -1,0 +1,10 @@
+<!-- Mini SOC local rule 100101: tested on Wazuh 4.14.7, 2026-09-22.
+     Rule fragment only: insert inside the existing local <group> in
+     /var/ossec/etc/rules/local_rules.xml; do not replace the entire file.
+     Hours are defined in the Wazuh manager's UTC clock for this lab. -->
+<rule id="100101" level="10">
+  <if_sid>5715</if_sid>
+  <time>6 pm - 9 am</time>
+  <description>Mini SOC: successful SSH login outside lab hours.</description>
+  <group>authentication_success,mini_soc,</group>
+</rule>
