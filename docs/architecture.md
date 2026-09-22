@@ -27,14 +27,9 @@ Rules -> alerts -> analyst investigation -> incident report
 | Test source | Host or authorized lab VM, TBD | TBD | TBD | Not selected |
 | Windows endpoint (optional) | TBD | TBD | TBD | Not deployed |
 
-## Planning checks
-- Host OS: Windows 11 Pro 64-bit, build 10.0.26200 (observed 2026-09-22)
-- Host CPU / core count: Intel Core i7-8850H, 6 cores / 12 threads (observed)
-- Host RAM: 31.66 GiB total, 22.81 GiB free at diagnostic (observed)
-- Available disk: C: 237.52 GiB total, **18.4 GiB free**; additional usable volumes not yet verified. **Storage is a blocker to deployment.**
-- Hypervisor / container support: Windows reports HypervisorPresent=True; Docker CLI 29.7.2, Engine availability not confirmed (blank version); WSL 2 with default docker-desktop. Firmware virtualization field not visible in shared output.
-- Isolated network type and inbound access policy: TBD
-- Wazuh deployment method and actual versions: TBD
+## Deployment decisions (pending)
+- Select a feasible storage location and supported deployment method before installing lab components.
+- Record the **actual lab** network isolation, monitored agents and component versions after setup.
 
 ## Scope and safety
 Only target machines owned/controlled inside this isolated lab. Do not expose management services or SSH to the public Internet. Redact secrets before publishing. A successful detection demonstrates an observed signal; it does not automatically prove a real compromise.
