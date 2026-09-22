@@ -27,9 +27,11 @@ Rules -> alerts -> analyst investigation -> incident report
 | Test source | Host or authorized lab VM, TBD | TBD | TBD | Not selected |
 | Windows endpoint (optional) | TBD | TBD | TBD | Not deployed |
 
-## Deployment decisions (pending)
-- Select a feasible storage location and supported deployment method before installing lab components.
-- Record the **actual lab** network isolation, monitored agents and component versions after setup.
+## Deployment plan (not yet implemented)
+- Hypervisor: VMware (existing local installation).
+- Two separate planned VMs: Wazuh manager/indexer/dashboard and Ubuntu SSH endpoint with Wazuh agent.
+- Use a dedicated lab folder for VM disks, separate from existing projects; record the actual lab network isolation, guest versions and service health only after verification.
+- No VMs, agents, detections or network controls have been created/tested yet.
 
 ## Scope and safety
 Only target machines owned/controlled inside this isolated lab. Do not expose management services or SSH to the public Internet. Redact secrets before publishing. A successful detection demonstrates an observed signal; it does not automatically prove a real compromise.
