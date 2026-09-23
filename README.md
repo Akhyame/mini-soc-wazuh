@@ -4,6 +4,11 @@
 
 ## Architecture — implemented
 
+![Mini SOC — conceptual architecture diagram](screenshots/mini-soc-architecture.png)
+
+*Conceptual architecture illustration (not original forensic evidence).* [Public screenshot gallery](screenshots/README.md).
+
+
 ```text
 VMware Host-only lab (VMnet1)
 Ubuntu monitored endpoint: mini-soc-agent (192.168.80.129)
@@ -33,9 +38,12 @@ The central Ubuntu VM runs Wazuh Manager, Indexer and Dashboard. An existing end
 
 ## Saved SOC dashboard
 
-`Mini SOC - Security Overview` uses four visualizations: **Total Alerts**, **Alerts by Rule Level**, **Alerts Over Time** and **Top 10 Alert Rules**. The saved view uses `agent.name:"mini-soc-agent"` and the rolling **Last 7 days** period. At the time of the [documented dashboard snapshot](docs/dashboard.md), it displayed **412 alert documents**, **not 412 attacks**. This time-dependent figure is not a fixed project statistic.
+`Mini SOC - Security Overview` uses four visualizations: **Total Alerts**, **Alerts by Rule Level**, **Alerts Over Time** and **Top 10 Alert Rules**. The saved view uses `agent.name:"mini-soc-agent"` and the rolling **Last 7 days** period. At the time of the [public dashboard screenshot](screenshots/P06-01-soc-dashboard.png), it displayed **412 alert documents**, **not 412 attacks**. This time-dependent figure is not a fixed project statistic.
 
 ## Reports and evidence
+
+**[View the six-image public gallery — architecture, Agent, custom alerts and Dashboard](screenshots/README.md).** The uploaded portfolio images show selected lab views; see the linked text evidence for event-level verification. The off-hours 100101 original screenshot has not yet been uploaded to this repository.
+
 
 - [Technical handover — actual topology, rules, operations and known limitations](docs/phase-07-technical-handover.md)
 - [SOC case report — repeated SSH failures, authorized lab](incident-report/ssh-repeated-failures-lab-case.md)
@@ -44,7 +52,7 @@ The central Ubuntu VM runs Wazuh Manager, Indexer and Dashboard. An existing end
 - [Public dashboard description and observation snapshot](docs/dashboard.md)
 - [Public evidence-to-claim index](docs/evidence-index.md)
 
-**Public screenshot uploads are pending.** All currently published findings have supporting timestamps, log excerpts, rule XML and limitations in GitHub. Image files will be linked from [screenshots/](screenshots/README.md) after actual upload and verification. No private notebook access is required to read these results.
+**Six portfolio image files are now committed and linked under [screenshots/](screenshots/README.md).** This curated set comprises one conceptual architecture infographic and five selected visual evidence views. Some original source-log and rule 100101 screenshots are not yet publicly uploaded; the timestamped observations and rule XML remain available here without access to private work notes.
 
 ## Lab safety and disclosure
 
