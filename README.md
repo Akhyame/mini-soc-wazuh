@@ -33,16 +33,16 @@ The central Ubuntu VM runs Wazuh Manager, Indexer and Dashboard. An existing end
 
 ## Saved SOC dashboard
 
-`Mini SOC - Security Overview` uses four visualizations: **Total Alerts**, **Alerts by Rule Level**, **Alerts Over Time** and **Top 10 Alert Rules**. The saved view uses `agent.name:"mini-soc-agent"` and the rolling **Last 7 days** period. At the time of the [single final dashboard screenshot](https://app.notion.com/p/3e37554fee9d810eb654c9191327fbe5), it displayed **412 alert documents**, **not 412 attacks**. This time-dependent figure is not a fixed project statistic.
+`Mini SOC - Security Overview` uses four visualizations: **Total Alerts**, **Alerts by Rule Level**, **Alerts Over Time** and **Top 10 Alert Rules**. The saved view uses `agent.name:"mini-soc-agent"` and the rolling **Last 7 days** period. At the time of the [single final dashboard screenshot](docs/dashboard.md), it displayed **412 alert documents**, **not 412 attacks**. This time-dependent figure is not a fixed project statistic.
 
 ## Reports and evidence
 
 - [Technical handover — actual topology, rules, operations and known limitations](docs/phase-07-technical-handover.md)
 - [SOC case report — repeated SSH failures, authorized lab](incident-report/ssh-repeated-failures-lab-case.md)
-- [Original Wazuh rule-test screenshots and detection matrix (Notion Phase 04)](https://app.notion.com/p/3e37554fee9d81a6a57feee525dc272c)
-- [SOC analysis, original 23 Sep log observations and benign-test disposition (Notion Phase 05)](https://app.notion.com/p/3e37554fee9d81a28474d0e3ec8e0f3b)
-- [Dashboard screenshot (Notion Phase 06)](https://app.notion.com/p/3e37554fee9d810eb654c9191327fbe5)
-- [Claim-to-evidence traceability index (Notion Phase 07)](https://app.notion.com/p/3e37554fee9d81e0ac56e2c77209bcd6)
+- [Original Wazuh rule-test screenshots and detection matrix (Notion Phase 04)](docs/evidence-index.md)
+- [SOC analysis, original 23 Sep log observations and benign-test disposition (Notion Phase 05)](incident-report/ssh-repeated-failures-lab-case.md)
+- [Dashboard screenshot (Notion Phase 06)](docs/dashboard.md)
+- [Claim-to-evidence traceability index (Notion Phase 07)](docs/phase-07-technical-handover.md)
 
 Screenshots are maintained in the relevant Notion phase, **not copied into this repository**. Some earlier scaffold documents under `docs/` still contain historical planning text; the [technical handover](docs/phase-07-technical-handover.md) and linked evidence above are the current implementation references until those scaffold files are reconciled.
 
