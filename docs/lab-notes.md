@@ -22,4 +22,4 @@
 
 ## Decision and publication scope
 
-The additional 23 Sep SSH tests repeated patterns already validated on 22 Sep; later project phases reuse evidence rather than rerunning tests or duplicating screenshots. The public repository includes source-log excerpts, rule XML, dashboard configuration and an analyst report. Original screenshots were not yet uploaded to GitHub; do not claim that they are publicly available until files exist under [screenshots/](../screenshots/README.md). Never publish passwords or secrets.
+The additional 23 Sep SSH tests repeated patterns already validated on 22 Sep; later project phases reuse evidence rather than rerunning tests or duplicating screenshots. The public repository includes source-log excerpts, rule XML, dashboard configuration and an analyst report. A curated set of six portfolio image files was subsequently uploaded and verified under [screenshots/](../screenshots/README.md). It includes one designed explanatory infographic and five selected Wazuh/Ubuntu views, not every originally captured image. Never publish passwords or secrets.
