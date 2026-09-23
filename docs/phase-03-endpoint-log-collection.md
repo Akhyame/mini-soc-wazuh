@@ -1,6 +1,6 @@
 # Phase 03 — Ubuntu Endpoint and SSH Log Collection
 
-**Status: verified for the Ubuntu endpoint (22 September 2026).** This is a local, authorized test lab, not a production SOC. Phase 04 custom rules, brute-force simulation, and network isolation testing have **not** been completed.
+**Status: verified for the Ubuntu endpoint (22 September 2026).** This is a local, authorized test lab, not a production SOC. This page covers Phase 03 only; later rule tests and Host-only networking are documented in [Detection Rules](../detection-rules/README.md) and [the public evidence index](evidence-index.md).
 
 ## Scope and deployment
 
@@ -38,16 +38,10 @@ In Wazuh **Threat Hunting → Events**, select a time range containing the event
 
 **Interpretation:** These results demonstrate endpoint-to-SIEM event ingestion and *built-in* SSH authentication alerting for two controlled local events. They do **not** demonstrate a custom detection rule, brute-force activity, compromise, or externally sourced SSH testing.
 
-## Evidence and publication privacy
+## Public evidence and privacy
 
-The private [Notion Phase 03 evidence page](https://app.notion.com/p/3e37554fee9d815e9aa0d6c4bbb05ba7) contains the original screenshots and captions:
-- `P03-01-agents-connected.png` — enrolled active Ubuntu agent.
-- `P03-02-ubuntu-source-log.png` — original SSH success in Ubuntu journald.
-- `P03-03-wazuh-ingested-event.png` — matching indexed Wazuh success.
-- `P03-05-failed-ssh-alert.png` — matching indexed Wazuh failure.
-
-**No screenshots are committed to GitHub yet.** Before exporting a *copy* from private Notion to this public repository, cover all real lab IPv4/IPv6 addresses (including address bar, agent IP and source-IP fields) and unrelated personal/browser identifiers with opaque masks. Keep the original private evidence intact and never publish passwords, tokens, private keys, or identifying local paths. `P03-04` (Windows monitoring) is optional and was not implemented.
+Original source-event timestamps and indexed-rule details are recorded above and in the [public evidence index](evidence-index.md). Screenshot files have **not yet been uploaded to GitHub**; see [the public screenshot checklist](../screenshots/README.md). Readers do not need a private notebook account to review the documented results. Retain private VMware lab addresses when useful for reproducibility; remove credentials, tokens and unrelated identifiers before publishing any screenshots. Windows agent monitoring was not implemented.
 
 ## Remaining work outside Phase 03
 
-Review/configure lab network isolation before multi-attempt SSH simulations or network-origin attack testing. Create and validate custom detection rules in the later detection-rule phase; do not label rule 5715 or 5760 as custom.
+**Subsequent completed work:** the two VMs were moved to VMware Host-only before bounded SSH repetition tests and three custom rules (100100, 100101, 100102) were validated. See [Detection Rules](../detection-rules/README.md); built-in 5715 and 5760 remain built-in. No external-origin testing was performed.
