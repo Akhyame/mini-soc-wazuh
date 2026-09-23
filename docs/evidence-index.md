@@ -1,6 +1,6 @@
 # Public evidence index — Mini SOC / Wazuh
 
-This index is **self-contained and public**. It separates (a) results transcribed from the observed Ubuntu/Wazuh outputs from (b) original screenshot files. **No original screenshots have been committed to this repository as of 23 September 2026.** For the current screenshots, see the [upload plan](../screenshots/README.md). A private project notebook is *not* required to understand the tests below.
+This index is **self-contained and public**. It separates (a) results transcribed from the observed Ubuntu/Wazuh outputs from (b) original screenshot files. **Selected original lab screenshots are now committed publicly:** [eight-file image gallery](../screenshots/README.md) (seven Wazuh/Ubuntu views plus one conceptual architecture illustration). The screenshot set does not include every original source-journal or interactive-logtest view. A private project notebook is *not* required to understand the tests below.
 
 ## Endpoint ingestion — 22 September 2026
 
@@ -44,7 +44,7 @@ Wazuh showed rule **5760**, level **5**, near 10:46:47 UI time and rule **5715**
 
 ## Off-hours SSH success — 22 September
 
-Illustrative permitted lab hours: **09:00–18:00 UTC**. Custom rule **100101**, level **10**, extends SSH success rule **5715** and uses the Wazuh Manager clock to evaluate its `<time>6 pm - 9 am</time>` condition. Synthetic logtest before 18:00 matched 5715; after 18:00 the same sample matched 100101. A real authorized local SSH success at **18:05:13 UTC** (source `127.0.0.1`, port **58948**) produced a **100101** live alert. This is a timing signal, not proof of an unauthorized login. Clock synchronization was not independently confirmed. [Rule XML](../detection-rules/ssh-off-hours.xml).
+Illustrative permitted lab hours: **09:00–18:00 UTC**. Custom rule **100101**, level **10**, extends SSH success rule **5715** and uses the Wazuh Manager clock to evaluate its `<time>6 pm - 9 am</time>` condition. Synthetic logtest before 18:00 matched 5715; after 18:00 the same sample matched 100101. A real authorized local SSH success at **18:05:13 UTC** (source `127.0.0.1`, port **58948**) produced a **100101** live alert ([search-result screenshot](../screenshots/P04-07-off-hours-ssh-live-alert.png) · [same event's Document Details](../screenshots/P04-07-off-hours-ssh-live-details.png)). This is a timing signal, not proof of an unauthorized login. Clock synchronization was not independently confirmed. [Rule XML](../detection-rules/ssh-off-hours.xml).
 
 ## Sudo executed as root — 22 September
 
