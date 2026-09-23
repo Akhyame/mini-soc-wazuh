@@ -11,4 +11,4 @@
 
 **Limitations:** These are bounded exercises, not evidence of real attacks, unauthorized escalation or account compromise. An in-hours SSH success was executed as a potential negative control, but the absence of 100101 in Wazuh was **not checked**. No Windows or network-port-scan activity is claimed. The complete [analyst report](../incident-report/ssh-repeated-failures-lab-case.md) documents source-to-alert reasoning and benign-test disposition.
 
-**Visual evidence:** Not yet published as files in the public repository; [screenshot upload plan](../screenshots/README.md). Text observations and technical artifacts above are available without private notebook access.
+**Selected visual evidence:** [Public screenshot gallery](../screenshots/README.md) now contains five curated Wazuh/Ubuntu views and one conceptual architecture illustration. The live off-hours 100101 screenshot is **not** included in that uploaded set; the event observations and rule XML above remain publicly documented.
