@@ -1,64 +1,51 @@
 # Mini SOC — Security Monitoring & Threat Detection Lab
 
-> **Status: planning / repository initialized.** Wazuh has not yet been deployed, and no detection or incident simulation has been tested.
+**Status (23 September 2026):** Operational **local training lab** with a connected Ubuntu endpoint, three live-tested custom Wazuh detection rules, a saved four-panel SOC dashboard, and an evidence-backed simulated-incident report. This is **not a production SOC or a real intrusion**. Remaining portfolio work: reconcile older scaffold files, index existing evidence and prepare the final public case study.
 
-A small, authorized **local lab** to practice the SOC workflow: collect endpoint security logs, understand SIEM ingestion, engineer and validate detection rules, investigate alerts, and document findings using Wazuh.
-
-## Planned architecture
+## Architecture — implemented
 
 ```text
-Controlled local test source
-            |
-            v
-Ubuntu SSH endpoint + Wazuh agent
-            |
-            v
-Wazuh manager -> indexer -> dashboard
-            |
-            v
-Tested rules -> observed alerts -> SOC investigation -> incident report
+VMware Host-only lab (VMnet1)
+Ubuntu monitored endpoint: mini-soc-agent (192.168.80.129)
+    authorized SSH / sudo activity on its own loopback 127.0.0.1
+           ↓
+    systemd-journald → Wazuh agent 4.14.7
+           ↓
+Wazuh Manager 4.14.7 (192.168.80.128)
+           ↓
+Built-in and custom detection rules → Indexer → Dashboard
+           ↓
+SOC investigation → documented benign-test disposition
 ```
 
-The topology and deployment method will be finalized after measuring available host resources. Windows monitoring is optional.
+The central Ubuntu VM runs Wazuh Manager, Indexer and Dashboard. An existing endpoint `journald` collector forwards local SSH and `sudo` logs. The two VMs were moved from VMware NAT to Host-only before bounded repeat-SSH testing; Host-only does not imply complete isolation from the host PC. Windows monitoring, network scan telemetry and production deployment were **not implemented**. [Implementation details and service checks](docs/phase-07-technical-handover.md).
 
-## Milestones
+## Verified detections
 
-1. Measure PC resources, design the isolated lab and choose a feasible topology.
-2. Deploy Wazuh central components and verify service health.
-3. Connect an Ubuntu agent and confirm matching SSH logs appear in Wazuh.
-4. Implement and **test** selected detection rules: repeated SSH failures; failure-to-success correlation (if technically feasible); login outside defined lab hours; and privilege changes.
-5. Simulate bounded authentication activity only against authorized lab hosts and validate real alerts.
-6. Build a monitoring dashboard and document analyst triage of a simulated event.
-7. Prepare an evidence-backed incident report and concise portfolio case study.
+| Scenario | Detection | What was observed |
+| --- | --- | --- |
+| Repeated failed SSH login | Custom **100100**, level **10**, five matched failures / 120 s, grouped by source IP | Interactive synthetic match and a bounded, live local SSH test produced a matching Wazuh alert. |
+| Failed SSH then successful SSH | Built-in **5760** (failure) and **5715** (success) | Two separate indexed alerts; analyst correlation **manual only**. |
+| Successful SSH login outside illustrative lab hours 09:00–18:00 UTC | Custom **100101**, level **10** | Synthetic tests on either side of 18:00 UTC and a real authorized off-hours login produced the expected matches. |
+| Successful `sudo` command as root | Custom **100102**, level **5** | A benign authorized `sudo /usr/bin/true` command generated a matching root-level privilege-use alert, **not** proof of malicious escalation. |
 
-**No phase is marked complete based solely on a plan.** See [the roadmap](docs/roadmap.md) for current status and [lab notes](docs/lab-notes.md) for observed results.
+[Exact XML fragments, observed tests and limitations](detection-rules/README.md). A test that triggers an alert is not proof of an external attacker, compromised account or actual malicious activity. Time synchronization, false-positive rates and the in-hours SSH negative-control result were not independently verified.
 
-## Repository structure
+## Saved SOC dashboard
 
-```text
-.
-├── README.md
-├── .gitignore
-├── docs/
-│   ├── roadmap.md
-│   ├── architecture.md
-│   └── lab-notes.md
-├── detection-rules/
-│   └── README.md
-├── attack-simulations/
-│   └── README.md
-├── screenshots/
-│   └── README.md
-└── incident-report/
-    └── incident-template.md
-```
+`Mini SOC - Security Overview` uses four visualizations: **Total Alerts**, **Alerts by Rule Level**, **Alerts Over Time** and **Top 10 Alert Rules**. The saved view uses `agent.name:"mini-soc-agent"` and the rolling **Last 7 days** period. At the time of the [single final dashboard screenshot](https://app.notion.com/p/3e37554fee9d810eb654c9191327fbe5), it displayed **412 alert documents**, **not 412 attacks**. This time-dependent figure is not a fixed project statistic.
 
-Verified rule XML, configuration examples, safe screenshots and final incident report will be added to the relevant folders **only after they actually exist**.
+## Reports and evidence
 
-## Safety and evidence standards
+- [Technical handover — actual topology, rules, operations and known limitations](docs/phase-07-technical-handover.md)
+- [SOC case report — repeated SSH failures, authorized lab](incident-report/ssh-repeated-failures-lab-case.md)
+- [Original Wazuh rule-test screenshots and detection matrix (Notion Phase 04)](https://app.notion.com/p/3e37554fee9d81a6a57feee525dc272c)
+- [SOC analysis, original 23 Sep log observations and benign-test disposition (Notion Phase 05)](https://app.notion.com/p/3e37554fee9d81a28474d0e3ec8e0f3b)
+- [Dashboard screenshot (Notion Phase 06)](https://app.notion.com/p/3e37554fee9d810eb654c9191327fbe5)
+- [Claim-to-evidence traceability index (Notion Phase 07)](https://app.notion.com/p/3e37554fee9d81e0ac56e2c77209bcd6)
 
-Only generate security test traffic against systems you own/control within an isolated lab. Do not expose Wazuh management components to the public Internet or commit passwords, API tokens, private keys, host-specific logs, or sensitive personal information. Each published detection result must have a real timestamped test and corresponding log/alert evidence. Do not treat a suspicious alert as proof of compromise.
+Screenshots are maintained in the relevant Notion phase, **not copied into this repository**. Some earlier scaffold documents under `docs/` still contain historical planning text; the [technical handover](docs/phase-07-technical-handover.md) and linked evidence above are the current implementation references until those scaffold files are reconciled.
 
-## Working documentation
+## Lab safety and disclosure
 
-[Notion Mini SOC project hub](https://app.notion.com/p/3e37554fee9d81c5aed4f152c448a2a6) contains separate phase pages, checklists, screenshot targets, investigation notes and evidence references.
+Run controlled security tests only on owned, authorized lab systems. Do not expose the SIEM publicly or publish passwords, API tokens, private keys or unrelated identifying data. Local RFC1918 addresses above describe the owned VMware lab, not an outside target. This repository records what was verified, distinguishes built-in from custom rules, and documents what remains untested.
