@@ -42,7 +42,7 @@ The central Ubuntu VM runs Wazuh Manager, Indexer and Dashboard. An existing end
 
 ## Reports and evidence
 
-**[View the six-image public gallery — architecture, Agent, custom alerts and Dashboard](screenshots/README.md).** The uploaded portfolio images show selected lab views; see the linked text evidence for event-level verification. The off-hours 100101 original screenshot has not yet been uploaded to this repository.
+**[View the eight-image public gallery — architecture, Agent, custom rules 100100/100101/100102, and Dashboard](screenshots/README.md).** The live off-hours SSH rule 100101 has two complementary original screenshots ([alert](screenshots/P04-07-off-hours-ssh-live-alert.png) · [matching details](screenshots/P04-07-off-hours-ssh-live-details.png)), which document one authorized test, not two. See the [text evidence index](docs/evidence-index.md) for event-level verification.
 
 
 - [Technical handover — actual topology, rules, operations and known limitations](docs/phase-07-technical-handover.md)
@@ -52,7 +52,7 @@ The central Ubuntu VM runs Wazuh Manager, Indexer and Dashboard. An existing end
 - [Public dashboard description and observation snapshot](docs/dashboard.md)
 - [Public evidence-to-claim index](docs/evidence-index.md)
 
-**Six portfolio image files are now committed and linked under [screenshots/](screenshots/README.md).** This curated set comprises one conceptual architecture infographic and five selected visual evidence views. Some original source-log and rule 100101 screenshots are not yet publicly uploaded; the timestamped observations and rule XML remain available here without access to private work notes.
+**Eight image files are committed and linked under [screenshots/](screenshots/README.md):** one conceptual architecture infographic and seven selected Wazuh/Ubuntu views, including two complementary views of the same 100101 live test. Some other original source-log and synthetic-test screenshots are not publicly uploaded; timestamped observations and rule XML are available here without private-workspace access.
 
 ## Lab safety and disclosure
 
