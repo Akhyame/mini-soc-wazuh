@@ -1,6 +1,6 @@
 # SOC case MINI-SOC-2026-09-23-SSH-01 — Repeated SSH failures
 
-**Disposition:** Closed as a **benign, authorized lab test**. This report is not a claim of a real security incident, intrusion or compromised account. A separate [private Phase 05 analyst record](https://app.notion.com/p/3e37554fee9d81a28474d0e3ec8e0f3b) holds the original investigation narrative; this public file is its concise, self-contained handoff, without duplicating screenshots.
+**Disposition:** Closed as a **benign, authorized lab test**. This report is not a claim of a real security incident, intrusion or compromised account. A separate [private Phase 05 analyst record](ssh-repeated-failures-lab-case.md) holds the original investigation narrative; this public file is its concise, self-contained handoff, without duplicating screenshots.
 
 ## Executive summary and scope
 
@@ -27,9 +27,9 @@ The central Wazuh 4.14.7 server collected `journald` events from `mini-soc-agent
 
 ## Evidence-to-claim references
 
-- [Phase 05 — original 23 Sep source-journal result, alert fields and analyst report](https://app.notion.com/p/3e37554fee9d81a28474d0e3ec8e0f3b). The 23 Sep screenshots originally captured there were removed by request to avoid duplicating the same categories of evidence as Phase 04; the **documented log output and Wazuh fields remain**.
-- [Phase 04 — independent 22 Sep controlled test screenshots, rule definition and detection matrix](https://app.notion.com/p/3e37554fee9d81a6a57feee525dc272c). These images support the **earlier 22 Sep test**, not a claim that the exact 23 Sep event appears in them.
+- [Phase 05 — original 23 Sep source-journal result, alert fields and analyst report](ssh-repeated-failures-lab-case.md). The 23 Sep log output and alert fields are transcribed in the public evidence index; no 23 Sep screenshot files have been published.
+- [Phase 04 — independent 22 Sep controlled test screenshots, rule definition and detection matrix](../docs/evidence-index.md). These images support the **earlier 22 Sep test**, not a claim that the exact 23 Sep event appears in them.
 - [Custom rule 100100 — exact XML fragment](../detection-rules/ssh-repeated-failures.xml) and [test details/limitations](../detection-rules/README.md).
-- [Phase 07 — technical handover and claim-to-evidence index](https://app.notion.com/p/3e37554fee9d81e0ac56e2c77209bcd6).
+- [Phase 07 — technical handover and claim-to-evidence index](../docs/phase-07-technical-handover.md).
 
 **Boundaries:** No external-source attack, account compromise, real-world business impact, statistically measured false-positive rate or automatic failed→successful-login correlation was established. The SSH in-hours negative-control attempt was not independently confirmed as a *negative-control PASS* in Wazuh. Credentials and unrelated personal data are not included in this public report.
