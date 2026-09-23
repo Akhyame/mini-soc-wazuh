@@ -11,6 +11,6 @@
 
 **Saved shared scope:** DQL `agent.name:"mini-soc-agent"`; **Last 7 days**, a **rolling** time period. At screenshot capture, the total was **412 Wazuh alert documents**. The dashboard contains routine endpoint activity and controlled test alerts. The number may change with time or new indexed events.
 
-**Screenshot state:** A final four-widget dashboard image was captured during the lab session but has **not yet been uploaded to the public repository**. Do not claim a GitHub screenshot exists until the actual file is added and verified in [screenshots/](../screenshots/README.md).
+**Public dashboard image:** [View the uploaded four-widget screenshot](../screenshots/P06-01-soc-dashboard.png). It is a capture-time snapshot, not a live dashboard or evidence of 412 distinct attacks.
 
 The source/alert relationship and rule outcomes are transcribed in [the public evidence index](evidence-index.md). For actual incident interpretation, see [the case report](../incident-report/ssh-repeated-failures-lab-case.md).
