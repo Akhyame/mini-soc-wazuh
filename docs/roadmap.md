@@ -11,10 +11,10 @@
 | 05 — SOC simulation and analysis | Authorized bounded SSH exercises; analyst documented a benign-test case without claiming compromise | **COMPLETE for analysis scope** — [incident report](../incident-report/ssh-repeated-failures-lab-case.md) |
 | 06 — Monitoring dashboard | Four saved visualizations; agent filter; Last 7 days; 412 alert documents at one capture-time snapshot | **COMPLETE for selected dashboard** — [dashboard details](dashboard.md) |
 | 07 — Technical report | Implemented-architecture handover, case report and evidence-to-claim index | **COMPLETE** — [handover](phase-07-technical-handover.md), [case](../incident-report/ssh-repeated-failures-lab-case.md), [index](evidence-index.md) |
-| 08 — Public repository audit | Old planning docs being reconciled; private-notebook links removed; public log evidence added | **IN PROGRESS** — [README](../README.md), [screenshot upload status](../screenshots/README.md) |
-| 09 — Screenshot index | Public image artifacts not uploaded yet; text evidence is available now | **PENDING** — [screenshots](../screenshots/README.md) |
+| 08 — Public repository audit | Public text and GitHub-first evidence are in place; six portfolio images committed and indexed | **COMPLETE for agreed six-image publication set** — [README](../README.md), [public gallery](../screenshots/README.md) |
+| 09 — Screenshot index | Six public portfolio images (one architecture illustration and five selected Wazuh/Ubuntu views) are committed and linked. Original live 100101 and source-to-SIEM pair are not in the six-image set | **COMPLETE for selected public gallery; optional extra evidence images pending** — [screenshots](../screenshots/README.md) |
 | 10 — Public portfolio / LinkedIn write-up | Final case study not yet published | **PENDING** |
 
 **Not implemented or verified:** Windows agent, scan telemetry, automatic chained failed→success alert, quantified false-positive rate, externally sourced attack, successful account compromise, independent negative-control PASS or independent clock-synchronization confirmation.
 
-**Data handling:** This GitHub repository is the public source of truth. Every linked evidence item above is accessible within the repository; screenshot files will only be linked once actually committed and checked.
+**Data handling:** This GitHub repository is the public source of truth. All six linked gallery image paths were checked against the public repository tree. No private work-note access is needed to read these results; additional original lab captures are not represented as uploaded.
