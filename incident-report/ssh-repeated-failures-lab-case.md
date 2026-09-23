@@ -1,6 +1,6 @@
 # SOC case MINI-SOC-2026-09-23-SSH-01 — Repeated SSH failures
 
-**Disposition:** Closed as a **benign, authorized lab test**. This report is not a claim of a real security incident, intrusion or compromised account. A separate [private Phase 05 analyst record](ssh-repeated-failures-lab-case.md) holds the original investigation narrative; this public file is its concise, self-contained handoff, without duplicating screenshots.
+**Disposition:** Closed as a **benign, authorized lab test**. This report is not a claim of a real security incident, intrusion or compromised account. This self-contained public report includes the findings, timeline, disposition and links to the [public source-log evidence index](../docs/evidence-index.md). No private notebook access is required.
 
 ## Executive summary and scope
 
@@ -27,9 +27,9 @@ The central Wazuh 4.14.7 server collected `journald` events from `mini-soc-agent
 
 ## Evidence-to-claim references
 
-- [Phase 05 — original 23 Sep source-journal result, alert fields and analyst report](ssh-repeated-failures-lab-case.md). The 23 Sep log output and alert fields are transcribed in the public evidence index; no 23 Sep screenshot files have been published.
-- [Phase 04 — independent 22 Sep controlled test screenshots, rule definition and detection matrix](../docs/evidence-index.md). These images support the **earlier 22 Sep test**, not a claim that the exact 23 Sep event appears in them.
+- [Original 23 Sep Ubuntu journal output and indexed alert fields](../docs/evidence-index.md). The text observations are public; screenshots have not yet been uploaded to GitHub.
+- [Independent 22 Sep controlled-test observations and detection rule outcomes](../docs/evidence-index.md). Those observations concern the **earlier 22 Sep test**, not the exact 23 Sep event.
 - [Custom rule 100100 — exact XML fragment](../detection-rules/ssh-repeated-failures.xml) and [test details/limitations](../detection-rules/README.md).
-- [Phase 07 — technical handover and claim-to-evidence index](../docs/phase-07-technical-handover.md).
+- [Public technical handover](../docs/phase-07-technical-handover.md) and [claim-to-evidence index](../docs/evidence-index.md).
 
 **Boundaries:** No external-source attack, account compromise, real-world business impact, statistically measured false-positive rate or automatic failed→successful-login correlation was established. The SSH in-hours negative-control attempt was not independently confirmed as a *negative-control PASS* in Wazuh. Credentials and unrelated personal data are not included in this public report.
