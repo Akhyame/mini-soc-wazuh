@@ -22,10 +22,10 @@ The custom XML files below are **rule fragments only**; the running Wazuh Manage
 
 | Scenario | Rule and observed result | Proof |
 | --- | --- | --- |
-| Repeated local SSH password failures | Custom **100100**, level 10: five matching failed SSH events from the same source IP within 120 seconds. Five bounded local failures triggered a matching live alert; synthetic logtest also passed. | [Exact XML](../detection-rules/ssh-repeated-failures.xml) · [Phase 04 original screenshots and matrix](https://app.notion.com/p/3e37554fee9d81a6a57feee525dc272c) |
-| Failed SSH followed by successful SSH | Built-in **5760** (failure) and **5715** (success) appeared as **separate** alerts. The analyst related them by source/account/time; **no automatic chained rule was implemented**. | [Phase 04 evidence](https://app.notion.com/p/3e37554fee9d81a6a57feee525dc272c) · [Phase 05 analyst notes](https://app.notion.com/p/3e37554fee9d81a28474d0e3ec8e0f3b) |
-| SSH success outside illustrative lab hours (09:00–18:00 UTC) | Custom **100101**, level 10, extends built-in 5715; synthetic tests on each side of 18:00 UTC and authorized live off-hours login matched as documented. | [Exact XML](../detection-rules/ssh-off-hours.xml) · [Phase 04 original evidence](https://app.notion.com/p/3e37554fee9d81a6a57feee525dc272c) |
-| Successful `sudo` execution as root | Custom **100102**, level 5, extends built-in 5402. A benign `sudo /usr/bin/true` produced a matching live alert. It detects **root privilege use**, not proven malicious escalation. | [Exact XML](../detection-rules/sudo-root-use.xml) · [Phase 04 original evidence](https://app.notion.com/p/3e37554fee9d81a6a57feee525dc272c) |
+| Repeated local SSH password failures | Custom **100100**, level 10: five matching failed SSH events from the same source IP within 120 seconds. Five bounded local failures triggered a matching live alert; synthetic logtest also passed. | [Exact XML](../detection-rules/ssh-repeated-failures.xml) · [Phase 04 original screenshots and matrix](evidence-index.md) |
+| Failed SSH followed by successful SSH | Built-in **5760** (failure) and **5715** (success) appeared as **separate** alerts. The analyst related them by source/account/time; **no automatic chained rule was implemented**. | [Phase 04 evidence](evidence-index.md) · [Phase 05 analyst notes](../incident-report/ssh-repeated-failures-lab-case.md) |
+| SSH success outside illustrative lab hours (09:00–18:00 UTC) | Custom **100101**, level 10, extends built-in 5715; synthetic tests on each side of 18:00 UTC and authorized live off-hours login matched as documented. | [Exact XML](../detection-rules/ssh-off-hours.xml) · [Phase 04 original evidence](evidence-index.md) |
+| Successful `sudo` execution as root | Custom **100102**, level 5, extends built-in 5402. A benign `sudo /usr/bin/true` produced a matching live alert. It detects **root privilege use**, not proven malicious escalation. | [Exact XML](../detection-rules/sudo-root-use.xml) · [Phase 04 original evidence](evidence-index.md) |
 
 Detailed original tests and known false-positive cases: [Detection Rules README](../detection-rules/README.md). Do not label a simulated `wazuh-logtest` match as an endpoint-originated event.
 
@@ -47,14 +47,14 @@ Service state alone is not evidence of complete ingestion: inspect the agent's f
 
 **Observed restart issue:** The Manager previously timed out during VM boot; its systemd start timeout was increased to **180 seconds**. On 23 September the Indexer reached its previous **3-minute** startup timeout. A drop-in at `/etc/systemd/system/wazuh-indexer.service.d/timeout.conf` set `TimeoutStartSec=600`; Indexer then reported `active` and the Dashboard reopened. These changes extend the waiting period; they do not by themselves establish why startup was slow.
 
-The saved **Mini SOC - Security Overview** dashboard has four panels: Total Alerts, Alerts by Rule Level, Alerts Over Time, and Top 10 Alert Rules. It was saved with DQL `agent.name:"mini-soc-agent"` and **Last 7 days** selected. Its [single final Phase 06 screenshot](https://app.notion.com/p/3e37554fee9d810eb654c9191327fbe5) displayed **412 alert documents at capture time**—not 412 attacks. Because Last 7 days is rolling, this is **not** a permanent metric. The pie/bar charts show selected top terms, not every rule or every level.
+The saved **Mini SOC - Security Overview** dashboard has four panels: Total Alerts, Alerts by Rule Level, Alerts Over Time, and Top 10 Alert Rules. It was saved with DQL `agent.name:"mini-soc-agent"` and **Last 7 days** selected. Its [single final Phase 06 screenshot](dashboard.md) displayed **412 alert documents at capture time**—not 412 attacks. Because Last 7 days is rolling, this is **not** a permanent metric. The pie/bar charts show selected top terms, not every rule or every level.
 
 ## Evidence handoff and limitations
 
-- [Phase 03 — original Ubuntu source log and Wazuh ingestion](https://app.notion.com/p/3e37554fee9d815e9aa0d6c4bbb05ba7)
-- [Phase 04 — original rule-test screenshots, XML and detection matrix](https://app.notion.com/p/3e37554fee9d81a6a57feee525dc272c)
-- [Phase 05 — SOC analysis and simulated-case report](https://app.notion.com/p/3e37554fee9d81a28474d0e3ec8e0f3b)
-- [Phase 06 — dashboard and its one original screenshot](https://app.notion.com/p/3e37554fee9d810eb654c9191327fbe5)
-- [Phase 07 — evidence-to-claim index](https://app.notion.com/p/3e37554fee9d81e0ac56e2c77209bcd6)
+- [Phase 03 — original Ubuntu source log and Wazuh ingestion](phase-03-endpoint-log-collection.md)
+- [Phase 04 — original rule-test screenshots, XML and detection matrix](evidence-index.md)
+- [Phase 05 — SOC analysis and simulated-case report](../incident-report/ssh-repeated-failures-lab-case.md)
+- [Phase 06 — dashboard and its one original screenshot](dashboard.md)
+- [Phase 07 — evidence-to-claim index](phase-07-technical-handover.md)
 
 **Not implemented/verified:** Windows agent, port-scan telemetry, automated failure→success correlation, external-source attack, actual compromise, quantified false-positive rates or a confirmed in-hours SSH *negative-control PASS*. VM clock synchronization was not independently confirmed, so off-hours detections should not be used as proof of time accuracy. All tested suspicious-looking events described here were authorized local lab activity. Do not publish passwords, tokens, private keys or unrelated personal identifiers.
