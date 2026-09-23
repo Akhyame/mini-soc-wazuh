@@ -1,6 +1,6 @@
 # Simulated Incident Report — Template
 
-> **Status: TEMPLATE ONLY.** No incident has been observed or investigated yet.
+> **Reusable blank template only.** A real **authorized lab simulation** and its completed report are documented in [ssh-repeated-failures-lab-case.md](ssh-repeated-failures-lab-case.md). Blank fields below are for future independent exercises, not missing fields in the completed case.
 
 ## 1. Scope
 Controlled local lab and authorized activity; not a production security incident.
